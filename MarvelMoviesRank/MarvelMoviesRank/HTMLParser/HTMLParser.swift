@@ -81,10 +81,8 @@ class HTMLParser {
         ///xPath
         let galleryWrapPhotosPath = "//div[@class='gallery-wrap photos']"
         let itemPath = "div[@class='item-wrap']"
-        
         let titlePath = "div[@class='caption']/strong"
-        
-
+    
         guard let document = document(by: htmlString) else {
             return movies
         }
@@ -104,8 +102,10 @@ class HTMLParser {
             (rank, movie) = splitRankAndName(by: title)
             imagePath = imageURL(by: item)
             
-            let marvelMovie = MarvelMovie(rank: rank, title: movie, imageURL: imagePath)
-            print(marvelMovie)
+            let marvelMovie = MarvelMovie(rank: rank,
+                                          title: movie,
+                                          imageURL: imagePath)
+            
             movies.append(marvelMovie)
         }
         

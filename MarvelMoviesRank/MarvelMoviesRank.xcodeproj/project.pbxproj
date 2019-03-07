@@ -19,6 +19,7 @@
 		DBA5FD7F223027F9001588B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA5FD7D223027F9001588B0 /* LaunchScreen.storyboard */; };
 		DBA5FD8A223027F9001588B0 /* MarvelMoviesRankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA5FD89223027F9001588B0 /* MarvelMoviesRankTests.swift */; };
 		DBA5FD95223027F9001588B0 /* MarvelMoviesRankUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA5FD94223027F9001588B0 /* MarvelMoviesRankUITests.swift */; };
+		DBBDAECD223150FA003506B4 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBDAECC223150FA003506B4 /* ArrayExtension.swift */; };
 		DBE3C73F22303896004CD601 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE3C73E22303896004CD601 /* MovieCell.swift */; };
 		DBE3C74122303C1F004CD601 /* HTMLLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE3C74022303C1F004CD601 /* HTMLLoader.swift */; };
 		DBFA556522311A3C00717E6F /* MarvelMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFA556422311A3C00717E6F /* MarvelMovie.swift */; };
@@ -65,6 +66,7 @@
 		DBA5FD90223027F9001588B0 /* MarvelMoviesRankUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarvelMoviesRankUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBA5FD94223027F9001588B0 /* MarvelMoviesRankUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelMoviesRankUITests.swift; sourceTree = "<group>"; };
 		DBA5FD96223027F9001588B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBBDAECC223150FA003506B4 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		DBE3C73E22303896004CD601 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		DBE3C74022303C1F004CD601 /* HTMLLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLLoader.swift; sourceTree = "<group>"; };
 		DBFA556422311A3C00717E6F /* MarvelMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelMovie.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 		DBA5FD73223027F7001588B0 /* MarvelMoviesRank */ = {
 			isa = PBXGroup;
 			children = (
+				DBBDAECB223150D6003506B4 /* Extension */,
 				DB906CA322303EAF00E2F8B9 /* Logger */,
 				DB906CA822303F8100E2F8B9 /* HTMLParser */,
 				DBFA556322311A1000717E6F /* Model */,
@@ -210,6 +213,14 @@
 				DBA5FD96223027F9001588B0 /* Info.plist */,
 			);
 			path = MarvelMoviesRankUITests;
+			sourceTree = "<group>";
+		};
+		DBBDAECB223150D6003506B4 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DBBDAECC223150FA003506B4 /* ArrayExtension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		DBE3C74222303C26004CD601 /* Network */ = {
@@ -370,6 +381,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-MarvelMoviesRank/Pods-MarvelMoviesRank-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -380,6 +392,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -465,6 +478,7 @@
 				DB906CA522303EBE00E2F8B9 /* Logger.swift in Sources */,
 				DBFA556522311A3C00717E6F /* MarvelMovie.swift in Sources */,
 				DBA5FD77223027F7001588B0 /* RankTableViewController.swift in Sources */,
+				DBBDAECD223150FA003506B4 /* ArrayExtension.swift in Sources */,
 				DBA5FD75223027F7001588B0 /* AppDelegate.swift in Sources */,
 				DB906CAA22303FB200E2F8B9 /* HTMLParser.swift in Sources */,
 				DBE3C74122303C1F004CD601 /* HTMLLoader.swift in Sources */,

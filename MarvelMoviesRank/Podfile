@@ -10,6 +10,7 @@ target 'MarvelMoviesRank' do
   pod 'RxCocoa',    '~> 4.0'
   pod 'Alamofire',  '~> 4.8'
   pod 'Kanna',      '~> 4.0.0'
+  pod 'Kingfisher', '~> 5.0'
 
   target 'MarvelMoviesRankTests' do
     inherit! :search_paths
