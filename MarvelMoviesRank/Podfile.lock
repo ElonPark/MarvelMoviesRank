@@ -1,6 +1,10 @@
 PODS:
   - Alamofire (4.8.1)
   - Kanna (4.0.3)
+  - Kingfisher (5.2.0)
+  - NVActivityIndicatorView (4.6.1):
+    - NVActivityIndicatorView/Presenter (= 4.6.1)
+  - NVActivityIndicatorView/Presenter (4.6.1)
   - RxAtomic (4.4.1)
   - RxCocoa (4.4.1):
     - RxSwift (~> 4.0)
@@ -10,6 +14,8 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.8)
   - Kanna (~> 4.0.0)
+  - Kingfisher (~> 5.0)
+  - NVActivityIndicatorView
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
 
@@ -17,6 +23,8 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - Kanna
+    - Kingfisher
+    - NVActivityIndicatorView
     - RxAtomic
     - RxCocoa
     - RxSwift
@@ -24,10 +32,12 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
   Kanna: 0ebbdd0e7e3308f0aafbd569e79c8cadc5eb877c
+  Kingfisher: 07067cfacf371117330dceb4b4b8f5c4b691ab42
+  NVActivityIndicatorView: 4ca19fccc84595a78957336a086d00a49be6ce61
   RxAtomic: f8d6adc1ccb87a767811269e4875887bc74dbf19
   RxCocoa: 2f35a76bf8887872e28a1914112395b11b8e0e64
   RxSwift: 92fcf68dfef21f3e2ab1965363d9e7b3d787597e
 
-PODFILE CHECKSUM: ffc1ba9dadba30c5fbf9f88b474879122aa8301a
+PODFILE CHECKSUM: 4ed124268cc29be2b66047db606f64e812dd58e6
 
 COCOAPODS: 1.6.0
