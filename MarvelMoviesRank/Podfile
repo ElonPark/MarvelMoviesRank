@@ -8,6 +8,7 @@ target 'MarvelMoviesRank' do
   # Pods for MarvelMoviesRank
   pod 'RxSwift',    '~> 4.0'
   pod 'RxCocoa',    '~> 4.0'
+  pod 'NVActivityIndicatorView'
   pod 'Alamofire',  '~> 4.8'
   pod 'Kanna',      '~> 4.0.0'
   pod 'Kingfisher', '~> 5.0'

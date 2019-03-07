@@ -9,9 +9,16 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import NVActivityIndicatorView
 import Kingfisher
 
 extension RankTableViewController {
+    
+    func startLoading() {
+        let size = CGSize(width: 40, height: 40)
+        let message = "데이터를 불러오는 중입니다."
+        startAnimating(size, message: message, type: .circleStrokeSpin)
+    }
     
     func prefersLargeTitles() {
         let navigationBar = navigationController?.navigationBar
@@ -46,20 +53,24 @@ extension RankTableViewController {
     }
     
     func loadMovieList() {
+        startLoading()
         let scheduler = ConcurrentDispatchQueueScheduler(qos: .userInteractive)
         
         Log.verbose("로딩 시작")
         HTMLLoader.loadHTML()
             .retry(2)
             .observeOn(scheduler)
-            .map { [weak self] movies in
-                guard let `self` = self else { return [MarvelMovie]() }
+            .map { [weak self] movies -> [MarvelMovie] in
+                guard let `self` = self else { return [] }
                 return self.sotedChunk(movies: movies)
             }
             .subscribeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] movies in
                 self?.dataSource.accept(movies)
+                self?.stopAnimating()
+                
                 }, onError: { [weak self] error in
+                    self?.stopAnimating()
                     self?.errorAlert(error)
             })
             .disposed(by: disposeBag)
@@ -115,7 +126,7 @@ extension RankTableViewController {
 /// - TODO: 리스트에서 보여주는 이미지를 캐쉬
 /// - TODO: LRU 알고리즘이 적용된 ImageLoader 방식으로 이미지를 캐쉬하여 로딩
 /// - TODO: 리스트 아이템 클릭시 원본 이미지 화면
-class RankTableViewController: UIViewController {
+class RankTableViewController: UIViewController, NVActivityIndicatorViewable {
 
     @IBOutlet weak var movieTableView: UITableView!
     
