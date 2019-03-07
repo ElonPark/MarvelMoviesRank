@@ -21,6 +21,7 @@
 		DBA5FD95223027F9001588B0 /* MarvelMoviesRankUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA5FD94223027F9001588B0 /* MarvelMoviesRankUITests.swift */; };
 		DBE3C73F22303896004CD601 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE3C73E22303896004CD601 /* MovieCell.swift */; };
 		DBE3C74122303C1F004CD601 /* HTMLLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE3C74022303C1F004CD601 /* HTMLLoader.swift */; };
+		DBFA556522311A3C00717E6F /* MarvelMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFA556422311A3C00717E6F /* MarvelMovie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		DBA5FD96223027F9001588B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBE3C73E22303896004CD601 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		DBE3C74022303C1F004CD601 /* HTMLLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLLoader.swift; sourceTree = "<group>"; };
+		DBFA556422311A3C00717E6F /* MarvelMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelMovie.swift; sourceTree = "<group>"; };
 		F3FBEB2F7BF1E014D9EB6158 /* Pods-MarvelMoviesRankUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarvelMoviesRankUITests.debug.xcconfig"; path = "Target Support Files/Pods-MarvelMoviesRankUITests/Pods-MarvelMoviesRankUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -179,6 +181,7 @@
 			children = (
 				DB906CA322303EAF00E2F8B9 /* Logger */,
 				DB906CA822303F8100E2F8B9 /* HTMLParser */,
+				DBFA556322311A1000717E6F /* Model */,
 				DBE3C74222303C26004CD601 /* Network */,
 				DB906CA722303F7400E2F8B9 /* Cell */,
 				DB906CA622303F6200E2F8B9 /* ViewController */,
@@ -215,6 +218,14 @@
 				DBE3C74022303C1F004CD601 /* HTMLLoader.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		DBFA556322311A1000717E6F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DBFA556422311A3C00717E6F /* MarvelMovie.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -452,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB906CA522303EBE00E2F8B9 /* Logger.swift in Sources */,
+				DBFA556522311A3C00717E6F /* MarvelMovie.swift in Sources */,
 				DBA5FD77223027F7001588B0 /* RankTableViewController.swift in Sources */,
 				DBA5FD75223027F7001588B0 /* AppDelegate.swift in Sources */,
 				DB906CAA22303FB200E2F8B9 /* HTMLParser.swift in Sources */,
