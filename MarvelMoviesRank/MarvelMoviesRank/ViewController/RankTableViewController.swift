@@ -78,24 +78,14 @@ extension RankTableViewController {
     
     func dataBinding() {
         dataSource.asDriver()
-            .drive(movieTableView.rx.items(cellIdentifier: MovieCell.identifier,
-                                           cellType: MovieCell.self)) { row, model, cell in
+            .drive(movieTableView.rx.items(cellIdentifier: MovieCell.identifier, cellType: MovieCell.self)) {(_, model, cell) in
                 cell.titleLabel.text = "\(model.rank). \(model.title)"
                 
+                cell.movieImageView.kf.indicatorType = .activity
                 //FIXME: 추후 LRU 알고리즘이 적용된 ImageLoader로 변경
                 let url = URL(string: model.imageURL)
                 cell.movieImageView.kf.setImage(with: url)
             }
-            .disposed(by: disposeBag)
-    }
-    
-    func selecteItem() {
-        movieTableView.rx
-            .itemSelected
-            .asDriver()
-            .drive(onNext: { indexPath in
-                Log.debug("select \(indexPath.row)")
-            })
             .disposed(by: disposeBag)
     }
     
@@ -121,11 +111,29 @@ extension RankTableViewController {
             })
             .disposed(by: disposeBag)
     }
+    
+    func showImage(with index: IndexPath) {
+        Log.debug("select \(index.row)")
+        guard let imageVC = MovieImageViewController.instantiateVC() else { return }
+        let cell = movieTableView.cellForRow(at: index) as? MovieCell
+        imageVC.image = cell?.movieImageView.image
+        
+        navigationController?.pushViewController(imageVC, animated: true)
+    }
+    
+    func selecteItem() {
+        movieTableView.rx
+            .itemSelected
+            .observeOn(MainScheduler.instance)
+            .bind { [weak self] (index) in
+                self?.showImage(with: index)
+            }
+            .disposed(by: disposeBag)
+    }
 }
 
 /// - TODO: 리스트에서 보여주는 이미지를 캐쉬
 /// - TODO: LRU 알고리즘이 적용된 ImageLoader 방식으로 이미지를 캐쉬하여 로딩
-/// - TODO: 리스트 아이템 클릭시 원본 이미지 화면
 class RankTableViewController: UIViewController, NVActivityIndicatorViewable {
 
     @IBOutlet weak var movieTableView: UITableView!
@@ -152,6 +160,11 @@ class RankTableViewController: UIViewController, NVActivityIndicatorViewable {
         dataBinding()
         selecteItem()
         updateTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false
     }
 }
 
