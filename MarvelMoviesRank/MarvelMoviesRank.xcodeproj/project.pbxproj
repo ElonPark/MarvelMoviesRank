@@ -139,8 +139,8 @@
 		DB906CA622303F6200E2F8B9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				DB938BE42231866C00E2CF92 /* MovieImageViewController.swift */,
 				DBA5FD76223027F7001588B0 /* RankTableViewController.swift */,
+				DB938BE42231866C00E2CF92 /* MovieImageViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";

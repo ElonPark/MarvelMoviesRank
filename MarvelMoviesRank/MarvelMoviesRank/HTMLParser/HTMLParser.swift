@@ -46,7 +46,7 @@ class HTMLParser {
         return document
     }
     
-    func splitRankAndName(by title:String) -> (Int, String) {
+    func splitRankAndName(by title:String) -> (rank: Int, name: String) {
         var rank: Int = 0
         var movie: String = ""
         let removeQuotation = title.replacingOccurrences(of: "\"", with: "")
@@ -60,19 +60,23 @@ class HTMLParser {
         return (rank, movie)
     }
     
-    func imageURL(by item: XMLElement) -> String {
+    func imageValue(by item: XMLElement) -> (title: String, url: String) {
+        var imageTitle: String = ""
         var imageURL: String = ""
         let imagePath = "div[@class='image-wrap']/a[@class='imagelink']"
         let srcPath = imagePath + "/img[@class='image']"
         let dataSrcPath = imagePath + "/img[@class='image lazy']"
         
-        if let src = item.at_xpath(srcPath)?["src"] {
+        if let path = item.at_xpath(srcPath), let title = path["title"], let src = path["src"] {
+            imageTitle = title
             imageURL = src
-        } else if let dataSrc = item.at_xpath(dataSrcPath)?["data-src"] {
+            
+        } else if let path = item.at_xpath(dataSrcPath), let title = path["title"], let dataSrc = path["data-src"] {
+            imageTitle = title
             imageURL = dataSrc
         }
         
-        return imageURL
+        return (imageTitle, imageURL)
     }
     
     func parsingData() -> [MarvelMovie] {
@@ -95,15 +99,17 @@ class HTMLParser {
         for item in element.xpath(itemPath) {
             var rank: Int = 0
             var movie: String = ""
+            var imageTitle: String = ""
             var imagePath: String = ""
             
             //strong 태그로 제목이 달린 경우에만 제목, 이미지 가져옴
             guard let title = item.at_xpath(titlePath)?.content else { continue }
             (rank, movie) = splitRankAndName(by: title)
-            imagePath = imageURL(by: item)
+            (imageTitle, imagePath) = imageValue(by: item)
             
             let marvelMovie = MarvelMovie(rank: rank,
                                           title: movie,
+                                          imageTitle: imageTitle,
                                           imageURL: imagePath)
             
             movies.append(marvelMovie)

@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-extension MovieImageViewController {
+extension MovieImageViewController: UIScrollViewDelegate {
     
     func setScrollView() {
         scrollView.alwaysBounceVertical = false
@@ -33,10 +33,9 @@ extension MovieImageViewController {
             })
             .disposed(by: disposeBag)
     }
-    
 }
 
-class MovieImageViewController: UIViewController, UIScrollViewDelegate {
+class MovieImageViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var movieImageView: UIImageView!

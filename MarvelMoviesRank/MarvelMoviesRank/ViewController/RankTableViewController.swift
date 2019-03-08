@@ -54,7 +54,7 @@ extension RankTableViewController {
     
     func loadMovieList() {
         startLoading()
-        let scheduler = ConcurrentDispatchQueueScheduler(qos: .userInteractive)
+        let scheduler = ConcurrentDispatchQueueScheduler(qos: .default)
         
         Log.verbose("로딩 시작")
         HTMLLoader.loadHTML()
