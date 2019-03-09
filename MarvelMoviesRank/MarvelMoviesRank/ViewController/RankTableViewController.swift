@@ -109,13 +109,14 @@ extension RankTableViewController {
                 //Kingfisher는 디스크 캐시를 LRU 알고리즘을 사용하여 정리함
                 // https://github.com/onevcat/Kingfisher/issues/404#issuecomment-240347946
                 
-                //캐시에서 이미지 가져옴
+                //Kingfisher는 캐시된 이미지가 있는 경우 캐시된 이미지를 보여주고, 이미지가 없을 경우만 다운로드를 진행함
                 if let url = self?.imageURLs[row] {
                     //셀 이미지뷰 사이즈로 다운샘플링 해서 보여줌
                     let downsampling = DownsamplingImageProcessor(size: cell.movieImageView.bounds.size)
                     cell.movieImageView.kf.setImage(with: url, options: [
                         .processor(downsampling),
-                        .scaleFactor(UIScreen.main.scale)
+                        .scaleFactor(UIScreen.main.scale),
+                        .cacheOriginalImage //캐시가 존재하지 않아 다운로드를 진행한 경우, 원본 이미지는 디스크 캐시에 캐시
                         ])
                 }
                 

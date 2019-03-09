@@ -1,6 +1,27 @@
 # MarvelMoviesRank
 여기어때 사전과제
 
+---
+> **개발환경**  
+> `macOS 10.14.3`  
+> `Xcode 10.1`  
+> `Swift 4.2`
+  
+
+    
+- 실행 시 주의 사항
+
+```shell
+    #다운로드한 폴더로 이동 후 
+    cd /MarvelMoviesRank/MarvelMoviesRank/
+    pod repo update
+    pod install
+
+```
+
+
+---
+
 ## 작업사항
 
 - [x] 위 사이트의 웹 소스를 파싱하여, 각 이미지와 정보를 갖는 리스트 생성 (순위, 타이틀)
