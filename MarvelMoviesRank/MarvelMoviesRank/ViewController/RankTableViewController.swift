@@ -59,8 +59,8 @@ extension RankTableViewController {
     func prefetchImage(by movies: [MarvelMovie]) {
         let urls = movies.compactMap { URL(string: $0.imageURL) }
         imageURLs.append(contentsOf: urls)
-        
-        let prefetcher = ImagePrefetcher(urls: urls)
+        //원본 이미지는 디스크 캐시에 캐시됨
+        let prefetcher = ImagePrefetcher(resources: urls, options: [.cacheOriginalImage])
         prefetcher.start()
     }
     
@@ -111,7 +111,12 @@ extension RankTableViewController {
                 
                 //캐시에서 이미지 가져옴
                 if let url = self?.imageURLs[row] {
-                    cell.movieImageView.kf.setImage(with: url)
+                    //셀 이미지뷰 사이즈로 다운샘플링 해서 보여줌
+                    let downsampling = DownsamplingImageProcessor(size: cell.movieImageView.bounds.size)
+                    cell.movieImageView.kf.setImage(with: url, options: [
+                        .processor(downsampling),
+                        .scaleFactor(UIScreen.main.scale)
+                        ])
                 }
                 
             }
@@ -144,12 +149,12 @@ extension RankTableViewController {
             .disposed(by: disposeBag)
     }
     
-    ///선택된 셀의 이미지 보여줌
-    func showImage(with index: IndexPath) {
+    ///이미지를 보여주기 위해 이미지 VC로 이동
+    func moveToMovieImageVC(with index: IndexPath) {
         Log.debug("select \(index.row)")
         guard let imageVC = MovieImageViewController.instantiateVC() else { return }
-        let cell = movieTableView.cellForRow(at: index) as? MovieCell
-        imageVC.image = cell?.movieImageView.image
+        
+        imageVC.imageURL = imageURLs[index.row]
         
         navigationController?.pushViewController(imageVC, animated: true)
     }
@@ -160,7 +165,7 @@ extension RankTableViewController {
             .itemSelected
             .observeOn(MainScheduler.instance)
             .bind { [weak self] (index) in
-                self?.showImage(with: index)
+                self?.moveToMovieImageVC(with: index)
             }
             .disposed(by: disposeBag)
     }
