@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import NVActivityIndicatorView
-import Kingfisher
+
 
 extension RankTableViewController {
     
@@ -166,7 +166,7 @@ class RankTableViewController: UIViewController, NVActivityIndicatorViewable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageLoader.clearCache()
+
         setMovieTableView()
         loadMovieList()
         dataBinding()
