@@ -85,6 +85,63 @@
             </objects>
             <point key="canvasLocation" x="982.5" y="111.97183098591549"/>
         </scene>
+        <!--Movie Image View Controller-->
+        <scene sceneID="2Ij-bz-Cu0">
+            <objects>
+                <viewController storyboardIdentifier="MovieImageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Lgw-SZ-ryW" customClass="MovieImageViewController" customModule="MarvelMoviesRank" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jq0-Jh-EuF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="91a-DE-E7b">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ASh-3U-tyK">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ASh-3U-tyK" firstAttribute="centerY" secondItem="91a-DE-E7b" secondAttribute="centerY" id="1Ex-s5-KnB"/>
+                                    <constraint firstItem="ASh-3U-tyK" firstAttribute="centerX" secondItem="91a-DE-E7b" secondAttribute="centerX" id="37s-bc-lST"/>
+                                    <constraint firstItem="ASh-3U-tyK" firstAttribute="leading" secondItem="91a-DE-E7b" secondAttribute="leading" id="FBE-2i-gRi"/>
+                                    <constraint firstAttribute="bottom" secondItem="ASh-3U-tyK" secondAttribute="bottom" id="lq3-8I-rR3"/>
+                                    <constraint firstAttribute="trailing" secondItem="ASh-3U-tyK" secondAttribute="trailing" id="nsX-L4-4GF"/>
+                                    <constraint firstItem="ASh-3U-tyK" firstAttribute="top" secondItem="91a-DE-E7b" secondAttribute="top" id="r9N-fI-KLq"/>
+                                </constraints>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2QR-c4-NUy">
+                                <rect key="frame" x="265" y="35" width="35" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="auN-1O-cpa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <state key="normal" title="닫기">
+                                    <color key="titleColor" red="0.99934560060501099" green="0.53209894895553589" blue="0.0014434953918680549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="91a-DE-E7b" secondAttribute="bottom" id="GUF-pi-5go"/>
+                            <constraint firstItem="2QR-c4-NUy" firstAttribute="top" secondItem="HPk-5O-it5" secondAttribute="top" constant="15" id="I75-zu-yOQ"/>
+                            <constraint firstItem="91a-DE-E7b" firstAttribute="leading" secondItem="HPk-5O-it5" secondAttribute="leading" id="IWq-Xa-Mwr"/>
+                            <constraint firstItem="HPk-5O-it5" firstAttribute="trailing" secondItem="91a-DE-E7b" secondAttribute="trailing" id="KOV-m4-BVc"/>
+                            <constraint firstItem="91a-DE-E7b" firstAttribute="top" secondItem="jq0-Jh-EuF" secondAttribute="top" id="TJ9-8w-u9k"/>
+                            <constraint firstItem="2QR-c4-NUy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HPk-5O-it5" secondAttribute="leading" symbolic="YES" id="e0X-2a-TNA"/>
+                            <constraint firstItem="HPk-5O-it5" firstAttribute="trailing" secondItem="2QR-c4-NUy" secondAttribute="trailing" constant="20" id="qqe-Xq-U3v"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HPk-5O-it5"/>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="2QR-c4-NUy" id="yj9-Rq-RgY"/>
+                        <outlet property="movieImageView" destination="ASh-3U-tyK" id="f04-Ie-NaB"/>
+                        <outlet property="scrollView" destination="91a-DE-E7b" id="j5b-aC-XPq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ihe-Do-ohS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1800" y="111.97183098591549"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="4AW-Iu-ogc">
             <objects>

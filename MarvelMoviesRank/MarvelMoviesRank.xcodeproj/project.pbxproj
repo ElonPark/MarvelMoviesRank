@@ -12,6 +12,8 @@
 		B178F29D06FE716640EAA1EB /* Pods_MarvelMoviesRankTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B62E4315438B54CB5F881955 /* Pods_MarvelMoviesRankTests.framework */; };
 		DB906CA522303EBE00E2F8B9 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB906CA422303EBE00E2F8B9 /* Logger.swift */; };
 		DB906CAA22303FB200E2F8B9 /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB906CA922303FB200E2F8B9 /* HTMLParser.swift */; };
+		DB938BE52231866C00E2CF92 /* MovieImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB938BE42231866C00E2CF92 /* MovieImageViewController.swift */; };
+		DB938BE722318CFF00E2CF92 /* StoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB938BE622318CFF00E2CF92 /* StoryboardExtension.swift */; };
 		DBA5FD75223027F7001588B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA5FD74223027F7001588B0 /* AppDelegate.swift */; };
 		DBA5FD77223027F7001588B0 /* RankTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA5FD76223027F7001588B0 /* RankTableViewController.swift */; };
 		DBA5FD7A223027F7001588B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA5FD78223027F7001588B0 /* Main.storyboard */; };
@@ -53,6 +55,8 @@
 		D429255A95B6B81FA202868B /* Pods_MarvelMoviesRankUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarvelMoviesRankUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB906CA422303EBE00E2F8B9 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		DB906CA922303FB200E2F8B9 /* HTMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLParser.swift; sourceTree = "<group>"; };
+		DB938BE42231866C00E2CF92 /* MovieImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieImageViewController.swift; sourceTree = "<group>"; };
+		DB938BE622318CFF00E2CF92 /* StoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardExtension.swift; sourceTree = "<group>"; };
 		DBA5FD71223027F7001588B0 /* MarvelMoviesRank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelMoviesRank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBA5FD74223027F7001588B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBA5FD76223027F7001588B0 /* RankTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankTableViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				DBA5FD76223027F7001588B0 /* RankTableViewController.swift */,
+				DB938BE42231866C00E2CF92 /* MovieImageViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -219,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				DBBDAECC223150FA003506B4 /* ArrayExtension.swift */,
+				DB938BE622318CFF00E2CF92 /* StoryboardExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -481,9 +487,11 @@
 				DBFA556522311A3C00717E6F /* MarvelMovie.swift in Sources */,
 				DBA5FD77223027F7001588B0 /* RankTableViewController.swift in Sources */,
 				DBBDAECD223150FA003506B4 /* ArrayExtension.swift in Sources */,
+				DB938BE52231866C00E2CF92 /* MovieImageViewController.swift in Sources */,
 				DBA5FD75223027F7001588B0 /* AppDelegate.swift in Sources */,
 				DB906CAA22303FB200E2F8B9 /* HTMLParser.swift in Sources */,
 				DBE3C74122303C1F004CD601 /* HTMLLoader.swift in Sources */,
+				DB938BE722318CFF00E2CF92 /* StoryboardExtension.swift in Sources */,
 				DBE3C73F22303896004CD601 /* MovieCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
