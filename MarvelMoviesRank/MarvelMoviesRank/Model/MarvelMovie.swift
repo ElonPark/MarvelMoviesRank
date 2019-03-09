@@ -11,6 +11,5 @@ import Foundation
 struct MarvelMovie {
     let rank: Int
     let title: String
-    let imageTitle: String
     let imageURL: String
 }

@@ -13,7 +13,6 @@
 		DB906CA522303EBE00E2F8B9 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB906CA422303EBE00E2F8B9 /* Logger.swift */; };
 		DB906CAA22303FB200E2F8B9 /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB906CA922303FB200E2F8B9 /* HTMLParser.swift */; };
 		DB938BE52231866C00E2CF92 /* MovieImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB938BE42231866C00E2CF92 /* MovieImageViewController.swift */; };
-		DB938BE722318CFF00E2CF92 /* StoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB938BE622318CFF00E2CF92 /* StoryboardExtension.swift */; };
 		DB938BEA2234111D00E2CF92 /* LRU.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB938BE92234111D00E2CF92 /* LRU.swift */; };
 		DB938BEC2234155400E2CF92 /* LRUImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB938BEB2234155400E2CF92 /* LRUImageLoader.swift */; };
 		DBA5FD75223027F7001588B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA5FD74223027F7001588B0 /* AppDelegate.swift */; };
@@ -58,7 +57,6 @@
 		DB906CA422303EBE00E2F8B9 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		DB906CA922303FB200E2F8B9 /* HTMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLParser.swift; sourceTree = "<group>"; };
 		DB938BE42231866C00E2CF92 /* MovieImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieImageViewController.swift; sourceTree = "<group>"; };
-		DB938BE622318CFF00E2CF92 /* StoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardExtension.swift; sourceTree = "<group>"; };
 		DB938BE92234111D00E2CF92 /* LRU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRU.swift; sourceTree = "<group>"; };
 		DB938BEB2234155400E2CF92 /* LRUImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRUImageLoader.swift; sourceTree = "<group>"; };
 		DBA5FD71223027F7001588B0 /* MarvelMoviesRank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelMoviesRank.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,8 +200,8 @@
 				DB938BE82234110100E2CF92 /* LRU */,
 				DBBDAECB223150D6003506B4 /* Extension */,
 				DB906CA322303EAF00E2F8B9 /* Logger */,
-				DB906CA822303F8100E2F8B9 /* HTMLParser */,
 				DBFA556322311A1000717E6F /* Model */,
+				DB906CA822303F8100E2F8B9 /* HTMLParser */,
 				DBE3C74222303C26004CD601 /* Network */,
 				DB906CA722303F7400E2F8B9 /* Cell */,
 				DB906CA622303F6200E2F8B9 /* ViewController */,
@@ -238,7 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				DBBDAECC223150FA003506B4 /* ArrayExtension.swift */,
-				DB938BE622318CFF00E2CF92 /* StoryboardExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -505,7 +502,6 @@
 				DBA5FD75223027F7001588B0 /* AppDelegate.swift in Sources */,
 				DB906CAA22303FB200E2F8B9 /* HTMLParser.swift in Sources */,
 				DBE3C74122303C1F004CD601 /* HTMLLoader.swift in Sources */,
-				DB938BE722318CFF00E2CF92 /* StoryboardExtension.swift in Sources */,
 				DBE3C73F22303896004CD601 /* MovieCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
