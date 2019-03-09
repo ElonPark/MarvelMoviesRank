@@ -60,23 +60,20 @@ class HTMLParser {
         return (rank, movie)
     }
     
-    func imageValue(by item: XMLElement) -> (title: String, url: String) {
-        var imageTitle: String = ""
+    func imageURLString(by item: XMLElement) -> String {
         var imageURL: String = ""
         let imagePath = "div[@class='image-wrap']/a[@class='imagelink']"
         let srcPath = imagePath + "/img[@class='image']"
         let dataSrcPath = imagePath + "/img[@class='image lazy']"
         
-        if let path = item.at_xpath(srcPath), let title = path["title"], let src = path["src"] {
-            imageTitle = title
+        if let path = item.at_xpath(srcPath), let src = path["src"] {
             imageURL = src
             
-        } else if let path = item.at_xpath(dataSrcPath), let title = path["title"], let dataSrc = path["data-src"] {
-            imageTitle = title
+        } else if let path = item.at_xpath(dataSrcPath), let dataSrc = path["data-src"] {
             imageURL = dataSrc
         }
         
-        return (imageTitle, imageURL)
+        return imageURL
     }
     
     func parsingData() -> [MarvelMovie] {
@@ -99,18 +96,16 @@ class HTMLParser {
         for item in element.xpath(itemPath) {
             var rank: Int = 0
             var movie: String = ""
-            var imageTitle: String = ""
-            var imagePath: String = ""
+            var imageURL: String = ""
             
             //strong 태그로 제목이 달린 경우에만 제목, 이미지 가져옴
             guard let title = item.at_xpath(titlePath)?.content else { continue }
             (rank, movie) = splitRankAndName(by: title)
-            (imageTitle, imagePath) = imageValue(by: item)
+            imageURL = imageURLString(by: item)
             
             let marvelMovie = MarvelMovie(rank: rank,
                                           title: movie,
-                                          imageTitle: imageTitle,
-                                          imageURL: imagePath)
+                                          imageURL: imageURL)
             
             movies.append(marvelMovie)
         }
