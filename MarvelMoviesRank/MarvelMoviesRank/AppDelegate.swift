@@ -8,8 +8,6 @@
 
 import UIKit
 
-///로거
-let log = Log()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
