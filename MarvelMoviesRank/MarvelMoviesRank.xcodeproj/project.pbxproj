@@ -14,6 +14,8 @@
 		DB906CAA22303FB200E2F8B9 /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB906CA922303FB200E2F8B9 /* HTMLParser.swift */; };
 		DB938BE52231866C00E2CF92 /* MovieImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB938BE42231866C00E2CF92 /* MovieImageViewController.swift */; };
 		DB938BE722318CFF00E2CF92 /* StoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB938BE622318CFF00E2CF92 /* StoryboardExtension.swift */; };
+		DB938BEA2234111D00E2CF92 /* LRU.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB938BE92234111D00E2CF92 /* LRU.swift */; };
+		DB938BEC2234155400E2CF92 /* LRUImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB938BEB2234155400E2CF92 /* LRUImageLoader.swift */; };
 		DBA5FD75223027F7001588B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA5FD74223027F7001588B0 /* AppDelegate.swift */; };
 		DBA5FD77223027F7001588B0 /* RankTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA5FD76223027F7001588B0 /* RankTableViewController.swift */; };
 		DBA5FD7A223027F7001588B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA5FD78223027F7001588B0 /* Main.storyboard */; };
@@ -57,6 +59,8 @@
 		DB906CA922303FB200E2F8B9 /* HTMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLParser.swift; sourceTree = "<group>"; };
 		DB938BE42231866C00E2CF92 /* MovieImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieImageViewController.swift; sourceTree = "<group>"; };
 		DB938BE622318CFF00E2CF92 /* StoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardExtension.swift; sourceTree = "<group>"; };
+		DB938BE92234111D00E2CF92 /* LRU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRU.swift; sourceTree = "<group>"; };
+		DB938BEB2234155400E2CF92 /* LRUImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRUImageLoader.swift; sourceTree = "<group>"; };
 		DBA5FD71223027F7001588B0 /* MarvelMoviesRank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelMoviesRank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBA5FD74223027F7001588B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBA5FD76223027F7001588B0 /* RankTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankTableViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +165,15 @@
 			path = HTMLParser;
 			sourceTree = "<group>";
 		};
+		DB938BE82234110100E2CF92 /* LRU */ = {
+			isa = PBXGroup;
+			children = (
+				DB938BE92234111D00E2CF92 /* LRU.swift */,
+				DB938BEB2234155400E2CF92 /* LRUImageLoader.swift */,
+			);
+			path = LRU;
+			sourceTree = "<group>";
+		};
 		DBA5FD68223027F7001588B0 = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +199,7 @@
 		DBA5FD73223027F7001588B0 /* MarvelMoviesRank */ = {
 			isa = PBXGroup;
 			children = (
+				DB938BE82234110100E2CF92 /* LRU */,
 				DBBDAECB223150D6003506B4 /* Extension */,
 				DB906CA322303EAF00E2F8B9 /* Logger */,
 				DB906CA822303F8100E2F8B9 /* HTMLParser */,
@@ -387,7 +401,6 @@
 				"${PODS_ROOT}/Target Support Files/Pods-MarvelMoviesRank/Pods-MarvelMoviesRank-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -399,7 +412,6 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -487,6 +499,8 @@
 				DBFA556522311A3C00717E6F /* MarvelMovie.swift in Sources */,
 				DBA5FD77223027F7001588B0 /* RankTableViewController.swift in Sources */,
 				DBBDAECD223150FA003506B4 /* ArrayExtension.swift in Sources */,
+				DB938BEC2234155400E2CF92 /* LRUImageLoader.swift in Sources */,
+				DB938BEA2234111D00E2CF92 /* LRU.swift in Sources */,
 				DB938BE52231866C00E2CF92 /* MovieImageViewController.swift in Sources */,
 				DBA5FD75223027F7001588B0 /* AppDelegate.swift in Sources */,
 				DB906CAA22303FB200E2F8B9 /* HTMLParser.swift in Sources */,

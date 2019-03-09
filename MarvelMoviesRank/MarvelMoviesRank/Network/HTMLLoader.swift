@@ -18,7 +18,7 @@ struct HTMLLoader {
     
     static func loadHTML() -> Observable<[MarvelMovie]> {
         return Observable.create { observer in
-            Alamofire.request(baseURL, method: .get)
+            Alamofire.request(baseURL)
                 .responseString { (response) in
                     switch response.result {
                     case .success(let htmlString):

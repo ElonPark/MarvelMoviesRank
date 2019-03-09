@@ -17,7 +17,10 @@ class MovieCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-      
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
         movieImageView.image = nil
         titleLabel.text = ""
     }
