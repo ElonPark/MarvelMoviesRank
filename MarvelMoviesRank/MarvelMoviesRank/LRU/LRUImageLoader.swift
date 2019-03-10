@@ -52,17 +52,9 @@ class LRUImageLoader {
     func clearCache() {
         cache.removeAll()
     }
-}
-
-extension UIImageView {
     
-    func setImageWithCache(loader: LRUImageLoader, url: String) {
-        if let cache = loader.getImage(key: url) {
-            self.image = cache
-        } else {
-            loader.setImage(urlString: url) {[weak self] (newImage) in
-                self?.image = newImage
-            }
-        }
+    func cacheDescription() -> String {
+        return cache.description
     }
 }
+

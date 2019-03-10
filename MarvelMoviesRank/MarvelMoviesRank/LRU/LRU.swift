@@ -42,15 +42,15 @@ class LinkedList<K, V> {
     
     func remove(node: Node<K, V>) {
         if node === head {
-            if let next = head?.next {
-                head = next
+            if head?.next != nil {
+                head = head?.next
                 head?.previous = nil
             } else {
                 head = nil
                 tail = nil
             }
-        } else if let next = head?.next  {
-            node.previous?.next = next
+        } else if node.next != nil {
+            node.previous?.next = node.next
             node.next?.previous = node.previous
         } else {
             node.previous?.next = nil
@@ -58,16 +58,18 @@ class LinkedList<K, V> {
         }
     }
     
-    var description: String {
-        var description = ""
-        var current = head
-        while current != nil {
-            guard let key = current?.key, let value = current?.value else { continue }
-            description += "Key: \(key), Value: \(value)\n"
-            
+    var description : String {
+        var number: Int = 0
+        var descriptionString = ""
+        var current = self.head
+        
+        while let now = current {
+            descriptionString += "\(number). Key: \(now.key)\n"
             current = current?.next
+            number += 1
         }
-        return description
+        
+        return descriptionString
     }
 }
 
@@ -80,6 +82,9 @@ class LRU<K : Hashable, V> : CustomStringConvertible {
     private let queue: LinkedList<K, V>
     private var hashTable: [K : Node<K, V>]
     
+    var description : String {
+        return "LRU Cache (\(length))\n" + queue.description
+    }
     
     init(capacity: Int) {
         self.capacity = capacity
@@ -102,7 +107,6 @@ class LRU<K : Hashable, V> : CustomStringConvertible {
     func set(key: K, value: V?) {
         if let node = hashTable[key] {
             node.value = value
-            
             queue.remove(node: node)
             queue.addToHead(node: node)
         } else {
@@ -154,9 +158,5 @@ class LRU<K : Hashable, V> : CustomStringConvertible {
         set(value) {
             set(key: key, value: value)
         }
-    }
-    
-    var description : String {
-        return "LRU Cache(\(self.length)) \n" + queue.description
     }
 }

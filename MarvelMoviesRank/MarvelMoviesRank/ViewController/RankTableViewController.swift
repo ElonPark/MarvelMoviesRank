@@ -83,6 +83,7 @@ extension RankTableViewController {
             .drive(movieTableView.rx.items(cellIdentifier: MovieCell.identifier, cellType: MovieCell.self)) { [weak self] row, model, cell in
                 cell.titleLabel.text = "\(model.rank). \(model.title)"
                 self?.imageLoader.setImage(urlString: model.imageURL) { image in
+                    
                     cell.movieImageView.image = image
                 }
             }
@@ -114,10 +115,11 @@ extension RankTableViewController {
             .disposed(by: disposeBag)
     }
     
-    ///이미지를 보여주기 위해 이미지 VC로 이동
+    ///이미지 VC로 이동
     func moveToMovieImageVC(with index: IndexPath) {
         Log.debug("select \(index.row)")
         guard let imageVC = MovieImageViewController.instantiateVC() else { return }
+        print(imageLoader.cacheDescription())
         
         let url = dataSource.value[index.row].imageURL
         imageVC.image = imageLoader.getImage(key: url)
@@ -157,7 +159,7 @@ class RankTableViewController: UIViewController, NVActivityIndicatorViewable {
     lazy var dataSource = BehaviorRelay(value: [MarvelMovie]())
     
     ///LRU 알고리즘이 적용된 이미지 로더
-    lazy var imageLoader = LRUImageLoader(capacity: 30)
+    lazy var imageLoader = LRUImageLoader(capacity: 20)
     
     override func loadView() {
         super.loadView()
