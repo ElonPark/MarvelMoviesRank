@@ -48,11 +48,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## Kingfisher
+## NVActivityIndicatorView
 
 The MIT License (MIT)
 
-Copyright (c) 2018 Wei Wang
+Copyright (c) 2016 Vinh Nguyen
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -73,12 +73,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-
-## NVActivityIndicatorView
+## Nuke
 
 The MIT License (MIT)
 
-Copyright (c) 2016 Vinh Nguyen
+Copyright (c) 2015-2018 Alexander Grebenyuk
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

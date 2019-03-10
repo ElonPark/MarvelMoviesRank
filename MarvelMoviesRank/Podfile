@@ -11,7 +11,8 @@ target 'MarvelMoviesRank' do
   pod 'NVActivityIndicatorView'
   pod 'Alamofire',  '~> 4.8'
   pod 'Kanna',      '~> 4.0.0'
-  pod 'Kingfisher', '~> 5.0'
+  pod 'Nuke', '~> 7.0'
+
 
   target 'MarvelMoviesRankTests' do
     inherit! :search_paths

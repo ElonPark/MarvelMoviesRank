@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import NVActivityIndicatorView
-import Kingfisher
+import Nuke
 
 extension RankTableViewController {
     
@@ -46,22 +46,31 @@ extension RankTableViewController {
     }
     
     func cacheConfig() {
-        let cache = ImageCache.default
         ///메로리 캐시 용량 제한 100MB
-        cache.memoryStorage.config.totalCostLimit = 100 * 1024 * 1024
+        ImageCache.shared.costLimit = 100 * 1024 * 1024
         ///메모리 캐시 갯수 제한
-        cache.memoryStorage.config.countLimit = 40
-        ///디스트 캐시 용량 제한 500MB, 초과할 경우 LRU 방식으로 정리됨
-        cache.diskStorage.config.sizeLimit = 500 * 1024 * 1024
+        ImageCache.shared.countLimit = 40
     }
     
-    ///리스트에 보여줄 이미지를 캐시
-    func prefetchImage(by movies: [MarvelMovie]) {
-        let urls = movies.compactMap { URL(string: $0.imageURL) }
-        imageURLs.append(contentsOf: urls)
-        //원본 이미지는 디스크 캐시에 캐시됨
-        let prefetcher = ImagePrefetcher(resources: urls, options: [.cacheOriginalImage])
-        prefetcher.start()
+    ///이미지 로더 설정
+    func setImagePipeline() {
+        cacheConfig()
+        
+        ///Nuke의 LRU 메모리 캐시와 LRU 디스크 캐시를 사용하기 위해
+        ///URL 캐시를 0으로 설정
+        let configuration = URLSessionConfiguration.default
+        configuration.urlCache = URLCache(memoryCapacity: 0,
+                                          diskCapacity: 0,
+                                          diskPath: nil)
+        
+        let imagePipeline = ImagePipeline {
+            $0.imageCache = ImageCache.shared
+            $0.dataLoader = DataLoader(configuration: configuration)
+            //custom LRU disk cache
+            $0.dataCache = try? DataCache(name: "app.elonparks.MarvelMoviesRank")
+        }
+
+        ImagePipeline.shared = imagePipeline
     }
     
     ///순위대로 정렬 후,  20개 단위로 로딩할 수 있도록 분할
@@ -83,7 +92,6 @@ extension RankTableViewController {
             .map { [weak self] movies -> [MarvelMovie] in
                 guard let `self` = self else { return [] }
                 let chunk = self.sortedChunk(movies: movies)
-                self.prefetchImage(by: chunk)
                 return chunk
             }
             .observeOn(MainScheduler.instance)
@@ -100,25 +108,15 @@ extension RankTableViewController {
     
     func dataBinding() {
         dataSource.asDriver()
-            .drive(movieTableView.rx.items(cellIdentifier: MovieCell.identifier, cellType: MovieCell.self)) { [weak self] row, model, cell in
+            .drive(movieTableView.rx.items(cellIdentifier: MovieCell.identifier, cellType: MovieCell.self)) { row, model, cell in
                 cell.titleLabel.text = "\(model.rank). \(model.title)"
-                cell.movieImageView.kf.indicatorType = .activity
 
-                //LRU 알고리즘이 적용된 ImageLoader
-                //Kingfisher는 디스크 캐시를 LRU 알고리즘을 사용하여 정리함
-                // https://github.com/onevcat/Kingfisher/issues/404#issuecomment-240347946
-                
-                //Kingfisher는 캐시된 이미지가 있는 경우 캐시된 이미지를 보여주고, 이미지가 없을 경우만 다운로드를 진행함
-                if let url = self?.imageURLs[row] {
-                    //셀 이미지뷰 사이즈로 다운샘플링 해서 보여줌
-                    let downsampling = DownsamplingImageProcessor(size: cell.movieImageView.bounds.size)
-                    cell.movieImageView.kf.setImage(with: url, options: [
-                        .processor(downsampling),
-                        .scaleFactor(UIScreen.main.scale),
-                        .cacheOriginalImage //캐시가 존재하지 않아 다운로드를 진행한 경우, 원본 이미지는 디스크 캐시에 캐시
-                        ])
+                ///LRU 알고리즘이 적용된 ImageLoader
+                ///Nuke는 LRU memory cache, LRU disk cache를 지원함
+                /// https://github.com/kean/Nuke
+                if let url = URL(string: model.imageURL) {
+                    Nuke.loadImage(with: url, into: cell.movieImageView)
                 }
-                
             }
             .disposed(by: disposeBag)
     }
@@ -134,7 +132,6 @@ extension RankTableViewController {
         guard page < dataChunks.count - 1 else { return }
         page += 1
         Log.debug("page: \(page)")
-        prefetchImage(by: dataChunks[page])
         dataSource.accept(dataSource.value + dataChunks[page])
     }
     
@@ -154,7 +151,7 @@ extension RankTableViewController {
         Log.debug("select \(index.row)")
         guard let imageVC = MovieImageViewController.instantiateVC() else { return }
         
-        imageVC.imageURL = imageURLs[index.row]
+        imageVC.imageURL = dataSource.value[index.row].imageURL
         
         navigationController?.pushViewController(imageVC, animated: true)
     }
@@ -190,8 +187,6 @@ class RankTableViewController: UIViewController, NVActivityIndicatorViewable {
     ///테이블뷰 데이터 소스
     lazy var dataSource = BehaviorRelay(value: [MarvelMovie]())
     
-    ///미리 불러오기 위한 이미지 URL 배열
-    var imageURLs = [URL]()
     
     override func loadView() {
         super.loadView()
@@ -202,8 +197,8 @@ class RankTableViewController: UIViewController, NVActivityIndicatorViewable {
         super.viewDidLoad()
         
         setMovieTableView()
-        
-        cacheConfig()
+       
+        setImagePipeline()
         loadMovieList()
         dataBinding()
         selecteItem()

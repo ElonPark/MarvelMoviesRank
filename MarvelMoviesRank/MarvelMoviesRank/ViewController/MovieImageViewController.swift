@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import Kingfisher
+import Nuke
 
 extension MovieImageViewController: UIScrollViewDelegate {
     
@@ -37,9 +37,9 @@ extension MovieImageViewController: UIScrollViewDelegate {
     
     
     func setMovieImage() {
-        guard let url = imageURL else { return }
+        guard let url = URL(string: imageURL) else { return }
         //원본 이미지 설정
-        movieImageView.kf.setImage(with: url, options: [.originalCache(ImageCache.default)])
+        Nuke.loadImage(with: url, into: movieImageView)
     }
 }
 
@@ -49,7 +49,7 @@ class MovieImageViewController: UIViewController {
     @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet weak var cancelButton: UIButton!
     
-    var imageURL: URL?
+    var imageURL: String = ""
     let disposeBag = DisposeBag()
     
     class func instantiateVC() -> MovieImageViewController? {
