@@ -37,7 +37,7 @@ extension MovieImageViewController: UIScrollViewDelegate {
     
     
     func setMovieImage() {
-        guard let url = imageURL else { return }
+        guard let url = URL(string: imageURL) else { return }
         //원본 이미지 설정
         movieImageView.kf.setImage(with: url, options: [.originalCache(ImageCache.default)])
     }
@@ -49,7 +49,7 @@ class MovieImageViewController: UIViewController {
     @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet weak var cancelButton: UIButton!
     
-    var imageURL: URL?
+    var imageURL: String = ""
     let disposeBag = DisposeBag()
     
     class func instantiateVC() -> MovieImageViewController? {

@@ -55,15 +55,6 @@ extension RankTableViewController {
         cache.diskStorage.config.sizeLimit = 500 * 1024 * 1024
     }
     
-    ///리스트에 보여줄 이미지를 캐시
-    func prefetchImage(by movies: [MarvelMovie]) {
-        let urls = movies.compactMap { URL(string: $0.imageURL) }
-        imageURLs.append(contentsOf: urls)
-        //원본 이미지는 디스크 캐시에 캐시됨
-        let prefetcher = ImagePrefetcher(resources: urls, options: [.cacheOriginalImage])
-        prefetcher.start()
-    }
-    
     ///순위대로 정렬 후,  20개 단위로 로딩할 수 있도록 분할
     func sortedChunk(movies: [MarvelMovie]) -> [MarvelMovie] {
         let ranking = movies.sorted { $0.rank < $1.rank }
@@ -83,7 +74,6 @@ extension RankTableViewController {
             .map { [weak self] movies -> [MarvelMovie] in
                 guard let `self` = self else { return [] }
                 let chunk = self.sortedChunk(movies: movies)
-                self.prefetchImage(by: chunk)
                 return chunk
             }
             .observeOn(MainScheduler.instance)
@@ -100,7 +90,7 @@ extension RankTableViewController {
     
     func dataBinding() {
         dataSource.asDriver()
-            .drive(movieTableView.rx.items(cellIdentifier: MovieCell.identifier, cellType: MovieCell.self)) { [weak self] row, model, cell in
+            .drive(movieTableView.rx.items(cellIdentifier: MovieCell.identifier, cellType: MovieCell.self)) { row, model, cell in
                 cell.titleLabel.text = "\(model.rank). \(model.title)"
                 cell.movieImageView.kf.indicatorType = .activity
 
@@ -109,16 +99,16 @@ extension RankTableViewController {
                 // https://github.com/onevcat/Kingfisher/issues/404#issuecomment-240347946
                 
                 //Kingfisher는 캐시된 이미지가 있는 경우 캐시된 이미지를 보여주고, 이미지가 없을 경우만 다운로드를 진행함
-                if let url = self?.imageURLs[row] {
+                if let url = URL(string: model.imageURL) {
                     //셀 이미지뷰 사이즈로 다운샘플링 해서 보여줌
                     let downsampling = DownsamplingImageProcessor(size: cell.movieImageView.bounds.size)
                     cell.movieImageView.kf.setImage(with: url, options: [
                         .processor(downsampling),
                         .scaleFactor(UIScreen.main.scale),
-                        .cacheOriginalImage //캐시가 존재하지 않아 다운로드를 진행한 경우, 원본 이미지는 디스크 캐시에 캐시
+                         //캐시가 존재하지 않아 다운로드를 진행한 경우, 원본 이미지는 디스크 캐시에 캐시
+                        .cacheOriginalImage
                         ])
                 }
-                
             }
             .disposed(by: disposeBag)
     }
@@ -134,7 +124,6 @@ extension RankTableViewController {
         guard page < dataChunks.count - 1 else { return }
         page += 1
         Log.debug("page: \(page)")
-        prefetchImage(by: dataChunks[page])
         dataSource.accept(dataSource.value + dataChunks[page])
     }
     
@@ -154,7 +143,7 @@ extension RankTableViewController {
         Log.debug("select \(index.row)")
         guard let imageVC = MovieImageViewController.instantiateVC() else { return }
         
-        imageVC.imageURL = imageURLs[index.row]
+        imageVC.imageURL = dataSource.value[index.row].imageURL
         
         navigationController?.pushViewController(imageVC, animated: true)
     }
@@ -190,8 +179,6 @@ class RankTableViewController: UIViewController, NVActivityIndicatorViewable {
     ///테이블뷰 데이터 소스
     lazy var dataSource = BehaviorRelay(value: [MarvelMovie]())
     
-    ///미리 불러오기 위한 이미지 URL 배열
-    var imageURLs = [URL]()
     
     override func loadView() {
         super.loadView()
