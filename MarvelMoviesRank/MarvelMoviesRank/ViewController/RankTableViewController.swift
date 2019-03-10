@@ -65,8 +65,7 @@ extension RankTableViewController {
                 guard let `self` = self else { return [] }
                 return self.sortedChunk(movies: movies)
             }
-            .observeOn(scheduler)
-            .subscribeOn(MainScheduler.instance)
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] movies in
                 self?.dataSource.accept(movies)
                 self?.stopAnimating()
