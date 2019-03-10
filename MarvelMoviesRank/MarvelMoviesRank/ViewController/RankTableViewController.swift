@@ -86,8 +86,7 @@ extension RankTableViewController {
                 self.prefetchImage(by: chunk)
                 return chunk
             }
-            .observeOn(scheduler)
-            .subscribeOn(MainScheduler.instance)
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] movies in
                 self?.dataSource.accept(movies)
                 self?.stopAnimating()
