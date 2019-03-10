@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import RxSwift
 
 class LRUImageLoader {
     
@@ -24,28 +25,26 @@ class LRUImageLoader {
         return cache[key]
     }
     
-    func setImage(urlString: String, completion: ((UIImage?) -> Void)? = nil) {
-        var image: UIImage? = nil
-        
-        guard cache[urlString] == nil else {
-            completion?(cache[urlString])
-            return
-        }
-        
-        Alamofire.request(urlString)
-            .responseData {[weak self] (response) in
-                defer {
-                    completion?(image)
-                }
-                
-                switch response.result {
-                case .success(let data):
-                    image = UIImage(data: data)
-                    self?.cache[urlString] = image
-                    
-                case .failure(let error):
-                    Log.error(error)
-                }
+    func setImage(urlString: String) -> Observable<UIImage?> {
+        return Observable.create { [weak self] observer in
+            guard self?.cache[urlString] == nil else {
+                observer.onNext(self?.cache[urlString])
+                return Disposables.create()
+            }
+            
+            Alamofire.request(urlString)
+                .responseData { (response) in
+                    switch response.result {
+                    case .success(let data):
+                        self?.cache[urlString] = UIImage(data: data)
+                        observer.onNext(self?.cache[urlString])
+                        
+                    case .failure(let error):
+                        Log.error(error)
+                        observer.onError(error)
+                    }
+            }
+            return Disposables.create()
         }
     }
     

@@ -78,14 +78,22 @@ extension RankTableViewController {
             .disposed(by: disposeBag)
     }
     
+    func setImage(to cell: MovieCell, url: String) {
+        imageLoader.setImage(urlString: url)
+            .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .retry(2)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { image in
+                cell.movieImageView.image = image
+            })
+            .disposed(by: disposeBag)
+    }
+    
     func dataBinding() {
         dataSource.asDriver()
-            .drive(movieTableView.rx.items(cellIdentifier: MovieCell.identifier, cellType: MovieCell.self)) { [weak self] row, model, cell in
+            .drive(movieTableView.rx.items(cellIdentifier: MovieCell.identifier, cellType: MovieCell.self)) { [unowned self] row, model, cell in
                 cell.titleLabel.text = "\(model.rank). \(model.title)"
-                self?.imageLoader.setImage(urlString: model.imageURL) { image in
-                    
-                    cell.movieImageView.image = image
-                }
+                self.setImage(to: cell, url: model.imageURL)
             }
             .disposed(by: disposeBag)
     }
