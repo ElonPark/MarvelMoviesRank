@@ -126,7 +126,6 @@ extension RankTableViewController {
     func moveToMovieImageVC(with index: IndexPath) {
         Log.debug("select \(index.row)")
         guard let imageVC = MovieImageViewController.instantiateVC() else { return }
-        print(imageLoader.cacheDescription())
         
         let url = dataSource.value[index.row].imageURL
         imageVC.image = imageLoader.getImage(key: url)
